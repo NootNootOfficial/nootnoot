@@ -9,45 +9,112 @@ html, body {
   height: 100%;
 }
 
-/* ===== ROOT ===== */
-:root {
-  --bg: #050512;
-  --radius: 22px;
-  --shadow: 0 24px 70px rgba(0,0,0,.65);
-}
-
 /* ===== BODY ===== */
 body {
-  background: var(--bg);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  background: #050512;
   overflow: hidden;
 }
 
-/* ===== STAGE (TŁO STRONY) ===== */
-.stage {
-  min-height: 100vh;
-  width: 100%;
-  display: grid;
-  place-items: center;
-  padding: 18px;
+/* ===== FULLSCREEN HERO ===== */
+.hero {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
 
-  background:
-    radial-gradient(1200px 800px at 25% 15%, rgba(120,90,255,.18), transparent 60%),
-    radial-gradient(900px 700px at 80% 35%, rgba(255,120,60,.12), transparent 60%),
-    radial-gradient(1200px 900px at 55% 90%, rgba(255,210,70,.10), transparent 62%),
-    linear-gradient(180deg, #050512, #070722 55%, #12073a);
+  background-image: url("./mockup.png");
+  background-size: cover;            /* ROZCIĄGNIĘTE */
+  background-position: center top;   /* nie ucina nagłówka */
+  background-repeat: no-repeat;
 }
 
-/* ===== PLAKAT 1:1 ===== */
-.poster {
-  display: block;
+/* subtelny overlay dla czytelności UI */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    800px 500px at 50% 50%,
+    rgba(0,0,0,.15),
+    rgba(0,0,0,.45)
+  );
+  z-index: 1;
+}
 
-  /* zachowanie proporcji i brak cropa */
-  max-height: calc(100vh - 36px);
-  max-width: min(560px, 92vw);
-  width: auto;
-  height: auto;
+/* ===== X LINK ===== */
+.x-link {
+  position: absolute;
+  top: 22px;
+  right: 22px;
+  z-index: 2;
 
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 10px 16px;
+  border-radius: 999px;
+
+  background: rgba(10,10,20,.55);
+  border: 1px solid rgba(255,255,255,.25);
+  backdrop-filter: blur(6px);
+
+  color: #fff;
+  text-decoration: none;
+  font-weight: 800;
+}
+
+.x-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #000;
+  font-weight: 900;
+}
+
+.x-handle {
+  letter-spacing: .3px;
+}
+
+/* ===== CTA CENTER ===== */
+.cta {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+}
+
+/* BUY LABEL */
+.buy-label {
+  font-size: clamp(22px, 4vw, 42px);
+  font-weight: 900;
+  color: #ffd54a;
+  text-shadow: 0 8px 24px rgba(0,0,0,.6);
+}
+
+/* RAYDIUM PLACEHOLDER */
+.swap-placeholder {
+  width: min(420px, 90vw);
+  height: 260px;
+
+  border-radius: 18px;
+  border: 2px dashed rgba(255,213,74,.65);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  font-weight: 800;
+  color: rgba(255,213,74,.9);
+  background: rgba(0,0,0,.45);
+  backdrop-filter: blur(6px);
 }
