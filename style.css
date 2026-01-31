@@ -1,13 +1,6 @@
 /* RESET */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html, body {
-  height: 100%;
-}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
 
 /* BODY */
 body {
@@ -15,13 +8,15 @@ body {
   font-family: system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
 }
 
-/* STAGE – tło strony */
-.stage {
+/* TŁO + WYŚRODKOWANIE */
+.stage{
   min-height: 100vh;
   width: 100%;
   display: grid;
   place-items: center;
-  padding: 24px;
+
+  /* mniej paddingu = większy plakat */
+  padding: 10px;
 
   background:
     radial-gradient(1200px 800px at 25% 15%, rgba(120,90,255,.18), transparent 60%),
@@ -30,16 +25,57 @@ body {
     linear-gradient(180deg, #050512, #070722 55%, #12073a);
 }
 
-/* PLAKAT – 1:1, bez cropa */
-.poster {
+/* PLAKAT — 1:1, maksymalnie duży, bez cropa */
+.poster{
   display: block;
 
-  max-height: calc(100vh - 48px);
-  max-width: min(560px, 92vw);
+  /* Klucz: plakat ma być jak największy, ale bez scrolla */
+  max-height: calc(100vh - 20px);
+  max-width:  calc(100vw - 20px);
 
   width: auto;
   height: auto;
 
   border-radius: 22px;
   box-shadow: 0 22px 60px rgba(0,0,0,.65);
+}
+
+/* ===== DYNAMICZNE DOPASOWANIE (breakpointy) ===== */
+
+/* Telefony: trochę większy margines, żeby nie “kleiło” do krawędzi */
+@media (max-width: 520px){
+  .stage { padding: 12px; }
+  .poster{
+    max-height: calc(100vh - 24px);
+    max-width:  calc(100vw - 24px);
+    border-radius: 18px;
+  }
+}
+
+/* Laptopy / standard: praktycznie full wysokość, delikatny margines */
+@media (min-width: 521px) and (max-width: 1280px){
+  .stage { padding: 8px; }
+  .poster{
+    max-height: calc(100vh - 16px);
+    max-width:  calc(100vw - 16px);
+  }
+}
+
+/* Duże monitory: dajemy “bardziej plakatowo” (większy, ale nadal z oddechem) */
+@media (min-width: 1281px){
+  .stage { padding: 6px; }
+  .poster{
+    max-height: calc(100vh - 12px);
+    max-width:  calc(100vw - 12px);
+  }
+}
+
+/* Ultra-wide: często jest bardzo szeroko, a wysokość ogranicza rozmiar.
+   Zostawiamy max-height jako główny limit – będzie wyglądać najlepiej. */
+@media (min-aspect-ratio: 21/9){
+  .stage { padding: 6px; }
+  .poster{
+    max-height: calc(100vh - 12px);
+    max-width:  calc(100vw - 40px);
+  }
 }
