@@ -11,12 +11,19 @@
 <body>
   <main class="stage">
     <div class="poster-wrap" aria-label="NOOT NOOT poster">
-      <img src="./mockup.png" alt="NOOT NOOT poster" class="poster" loading="eager" decoding="async" />
+      <img
+        src="./mockup.png"
+        alt="NOOT NOOT poster"
+        class="poster"
+        loading="eager"
+        decoding="async"
+      />
 
       <!-- Overlay UI -->
       <div class="ui">
+
+        <!-- TOP RIGHT: X + TikTok -->
         <div class="top-right">
-          <!-- X -->
           <a class="pill" href="https://x.com/NootNootMain" target="_blank" rel="noreferrer" aria-label="Official X @NootNootMain">
             <span class="pill__icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -26,7 +33,6 @@
             <span class="pill__text">@NootNootMain</span>
           </a>
 
-          <!-- TikTok -->
           <a class="pill" href="https://www.tiktok.com/@pingu/video/7477631512297344299" target="_blank" rel="noreferrer" aria-label="TikTok NOOT NOOT">
             <span class="pill__icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -37,10 +43,53 @@
           </a>
         </div>
 
-        <!-- Buy Button under penguin (positioned with CSS) -->
-        <a class="buy-btn" href="#" aria-label="Buy here $NOOT (Raydium later)">BUY HERE: <span>$NOOT</span></a>
+        <!-- BUY BUTTON (lower) -->
+        <a class="buy-btn" href="#" aria-label="Buy here $NOOT (Raydium later)">
+          BUY HERE: <span>$NOOT</span>
+        </a>
+
+        <!-- CA BOX (placeholder now) -->
+        <div class="ca-box" data-ca="PASTE_CA_HERE_LATER" aria-label="Contract Address">
+          <span class="ca-label">CA:</span>
+          <span class="ca-value">TBA</span>
+          <button class="ca-copy" type="button" aria-label="Copy contract address">📋</button>
+        </div>
+
       </div>
     </div>
   </main>
+
+  <script>
+    (function () {
+      const box = document.querySelector('.ca-box');
+      const btn = document.querySelector('.ca-copy');
+      const valueEl = document.querySelector('.ca-value');
+
+      if (!box || !btn || !valueEl) return;
+
+      btn.addEventListener('click', async () => {
+        const ca = box.dataset.ca;
+
+        // if CA not set yet
+        if (!ca || ca === 'PASTE_CA_HERE_LATER') {
+          const old = valueEl.textContent;
+          valueEl.textContent = 'Add CA later';
+          setTimeout(() => valueEl.textContent = old, 1200);
+          return;
+        }
+
+        try {
+          await navigator.clipboard.writeText(ca);
+          const old = valueEl.textContent;
+          valueEl.textContent = 'Copied!';
+          setTimeout(() => valueEl.textContent = old, 1200);
+        } catch (e) {
+          const old = valueEl.textContent;
+          valueEl.textContent = 'Copy failed';
+          setTimeout(() => valueEl.textContent = old, 1200);
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
