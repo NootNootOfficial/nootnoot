@@ -2,7 +2,7 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { height: 100%; }
 
-/* BACKGROUND */
+/* BODY */
 body{
   font-family: system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
   background: #050512;
@@ -23,11 +23,10 @@ body{
     linear-gradient(180deg, #050512, #070722 55%, #12073a);
 }
 
-/* WRAPPER: dynamic width (wider) */
+/* WRAPPER */
 .poster-wrap{
   position: relative;
   display: inline-block;
-
   width: min(1100px, 98vw);
   max-height: calc(100vh - 16px);
 }
@@ -88,7 +87,6 @@ body{
   border-color: rgba(255,255,255,.34);
 }
 
-/* icon hard-limit */
 .pill__icon{
   width: 18px;
   height: 18px;
@@ -106,15 +104,21 @@ body{
 }
 .pill__text{ font-size: 14px; }
 
-/* BUY BUTTON — moved lower */
-.buy-btn{
+/* CENTER STACK (BUY + CA) */
+.cta-stack{
   position: absolute;
   left: 50%;
-  top: 47%;                 /* moved down so it doesn't cover text */
-  transform: translate(-50%, 0);
-
+  top: 50%;
+  transform: translate(-50%, -10%); /* delikatnie wyżej niż idealny środek */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
   pointer-events: auto;
+}
 
+/* BUY BUTTON */
+.buy-btn{
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -141,19 +145,14 @@ body{
 }
 
 .buy-btn:hover{
-  transform: translate(-50%, -1px);
+  transform: translateY(-1px);
   filter: brightness(1.03);
 }
 
 .buy-btn span{ font-weight: 1000; }
 
-/* CA BOX under BUY */
+/* CA BOX */
 .ca-box{
-  position: absolute;
-  left: 50%;
-  top: 52%;
-  transform: translate(-50%, 0);
-
   display: inline-flex;
   align-items: center;
   gap: 10px;
@@ -168,17 +167,15 @@ body{
   color: #fff;
   font-weight: 700;
   font-size: 14px;
-
-  pointer-events: auto;
 }
 
 .ca-label{ opacity: .7; }
 
-/* CA highlighted color */
+/* CA highlighted */
 .ca-value{
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   letter-spacing: .4px;
-  color: #7cf7ff; /* standout cyan */
+  color: #7cf7ff;
   text-shadow:
     0 0 12px rgba(124,247,255,.45),
     0 0 2px rgba(0,0,0,.85);
@@ -193,7 +190,6 @@ body{
   color: #ffd54a;
   padding: 2px 4px;
 }
-
 .ca-copy:hover{ filter: brightness(1.1); }
 
 /* Mobile tweaks */
@@ -203,11 +199,27 @@ body{
   .pill{ padding: 8px 10px; }
   .pill__text{ font-size: 13px; }
 
-  .buy-btn{ top: 48%; padding: 12px 22px; }
-  .ca-box{ top: 54%; font-size: 13px; }
+  .cta-stack{
+    top: 52%;
+    transform: translate(-50%, -10%);
+    gap: 10px;
+  }
+
+  .buy-btn{
+    font-size: 15px;
+    padding: 10px 18px;
+    border-width: 2px;
+  }
+
+  .ca-box{
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+
+  .ca-copy{ font-size: 14px; }
 }
 
-/* Ultra-wide: even wider */
+/* Ultra-wide */
 @media (min-aspect-ratio: 21/9){
   .poster-wrap{ width: min(1400px, 98vw); }
 }
