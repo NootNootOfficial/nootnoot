@@ -43,16 +43,17 @@
           </a>
         </div>
 
-        <!-- BUY BUTTON (lower) -->
-        <a class="buy-btn" href="#" aria-label="Buy here $NOOT (Raydium later)">
-          BUY HERE: <span>$NOOT</span>
-        </a>
+        <!-- CENTER STACK (BUY + CA) -->
+        <div class="cta-stack" aria-label="Buy and Contract Address">
+          <a class="buy-btn" href="#" aria-label="Buy here $NOOT (Raydium later)">
+            BUY HERE: <span>$NOOT</span>
+          </a>
 
-        <!-- CA BOX (placeholder now) -->
-        <div class="ca-box" data-ca="PASTE_CA_HERE_LATER" aria-label="Contract Address">
-          <span class="ca-label">CA:</span>
-          <span class="ca-value">TBA</span>
-          <button class="ca-copy" type="button" aria-label="Copy contract address">📋</button>
+          <div class="ca-box" data-ca="PASTE_CA_HERE_LATER" aria-label="Contract Address">
+            <span class="ca-label">CA:</span>
+            <span class="ca-value">TBA</span>
+            <button class="ca-copy" type="button" aria-label="Copy contract address">📋</button>
+          </div>
         </div>
 
       </div>
@@ -70,7 +71,6 @@
       btn.addEventListener('click', async () => {
         const ca = box.dataset.ca;
 
-        // if CA not set yet
         if (!ca || ca === 'PASTE_CA_HERE_LATER') {
           const old = valueEl.textContent;
           valueEl.textContent = 'Add CA later';
