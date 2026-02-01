@@ -16,46 +16,83 @@
 
         <!-- TOP RIGHT -->
         <div class="top-right">
-          <a class="pill" href="https://x.com/NootNootMain" target="_blank">
-            <span class="icon">X</span> @NootNootMain
+          <!-- X -->
+          <a class="pill" href="https://x.com/NootNootMain" target="_blank" rel="noreferrer" aria-label="X @NootNootMain">
+            <span class="pill__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M18.9 2H22l-6.9 7.9L23 22h-6.9l-5.4-7-6.1 7H2l7.4-8.5L1 2h7.1l4.9 6.3L18.9 2zm-2.4 18h1.9L7.5 3.9H5.4L16.5 20z"/>
+              </svg>
+            </span>
+            <span class="pill__text">@NootNootMain</span>
           </a>
-          <a class="pill" href="https://www.tiktok.com/@pingu/video/7477631512297344299" target="_blank">
-            <span class="icon">🎵</span> NOOT NOOT
+
+          <!-- TikTok -->
+          <a class="pill" href="https://www.tiktok.com/@pingu/video/7477631512297344299" target="_blank" rel="noreferrer" aria-label="TikTok NOOT NOOT">
+            <span class="pill__icon tiktok" aria-hidden="true">
+              <!-- TikTok-style note (SVG, controlled size, no glitches) -->
+              <svg viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+                <path d="M29 8c1.6 6.4 5.5 10 11 10v7c-3.9 0-7.3-1.2-10-3.4V33c0 7.2-5.8 13-13 13S4 40.2 4 33s5.8-13 13-13c1.2 0 2.3.2 3.4.5v7.5c-1-.6-2.2-1-3.4-1-3.3 0-6 2.7-6 6s2.7 6 6 6 6-2.7 6-6V8h6z"/>
+              </svg>
+            </span>
+            <span class="pill__text">NOOT NOOT</span>
           </a>
         </div>
 
         <!-- BUY UNDER SOCIALS -->
-        <a class="buy-btn buy-top" href="#">
+        <a class="buy-top" href="#" aria-label="Buy here $NOOT (Raydium later)">
           BUY HERE: <span>$NOOT</span>
         </a>
 
-        <!-- CA AT BOTTOM -->
-        <div class="ca-bottom" data-ca="PASTE_CA_HERE_LATER">
-          <span class="ca-label">CA:</span>
-          <span class="ca-value">TBA</span>
-          <button class="ca-copy">📋</button>
+        <!-- CA AT BOTTOM (PREMIUM) -->
+        <div class="ca-bottom" data-ca="PASTE_CA_HERE_LATER" aria-label="Contract Address">
+          <div class="ca-title">CONTRACT ADDRESS</div>
+
+          <div class="ca-row">
+            <code class="ca-value">TBA</code>
+            <button class="ca-copy" type="button" aria-label="Copy contract address">
+              <span class="copy-icon" aria-hidden="true">⧉</span>
+              <span class="copy-text">Copy</span>
+            </button>
+          </div>
+
+          <div class="ca-hint">Click to copy • Paste your CA later</div>
         </div>
 
       </div>
     </div>
   </main>
 
-<script>
-(() => {
-  const box = document.querySelector('.ca-bottom');
-  const btn = document.querySelector('.ca-copy');
-  const val = document.querySelector('.ca-value');
+  <script>
+    (() => {
+      const box = document.querySelector('.ca-bottom');
+      const btn = document.querySelector('.ca-copy');
+      const valueEl = document.querySelector('.ca-value');
+      const hintEl = document.querySelector('.ca-hint');
 
-  btn.onclick = async () => {
-    const ca = box.dataset.ca;
-    if (!ca || ca === 'PASTE_CA_HERE_LATER') return;
+      if (!box || !btn || !valueEl) return;
 
-    await navigator.clipboard.writeText(ca);
-    val.textContent = 'Copied!';
-    setTimeout(() => val.textContent = ca, 1200);
-  };
-})();
-</script>
+      btn.addEventListener('click', async () => {
+        const ca = box.dataset.ca;
 
+        if (!ca || ca === 'PASTE_CA_HERE_LATER') {
+          const old = hintEl.textContent;
+          hintEl.textContent = 'Add CA later in index.html (data-ca + text).';
+          setTimeout(() => hintEl.textContent = old, 1400);
+          return;
+        }
+
+        try {
+          await navigator.clipboard.writeText(ca);
+          const old = hintEl.textContent;
+          hintEl.textContent = 'Copied ✅';
+          setTimeout(() => hintEl.textContent = old, 1200);
+        } catch (e) {
+          const old = hintEl.textContent;
+          hintEl.textContent = 'Copy failed ❌';
+          setTimeout(() => hintEl.textContent = old, 1200);
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
