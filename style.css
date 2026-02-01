@@ -108,14 +108,15 @@ body{
 .cta-stack{
   position: absolute;
   left: 50%;
-  top: 50%;
-  transform: translate(-50%, -10%); /* delikatnie wyżej niż idealny środek */
+  top: 56%;                 /* ⬅️ KLUCZ: niżej */
+  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 14px;
+  gap: 16px;
   pointer-events: auto;
 }
+
 
 /* BUY BUTTON */
 .buy-btn{
@@ -199,11 +200,12 @@ body{
   .pill{ padding: 8px 10px; }
   .pill__text{ font-size: 13px; }
 
-  .cta-stack{
-    top: 52%;
-    transform: translate(-50%, -10%);
-    gap: 10px;
-  }
+.cta-stack{
+  top: 60%;                 /* ⬅️ mobile jeszcze niżej */
+  transform: translate(-50%, -50%);
+  gap: 12px;
+}
+
 
   .buy-btn{
     font-size: 15px;
